@@ -47,6 +47,34 @@ SELECT symbol, date, (close - open) / open AS daily_return
 FROM stock_prices ORDER BY date DESC;
 ```
 
+You can check for row duplicates using 
+
+```sql 
+SELECT DISTINCT * FROM fast_food_stock_prices;
+```
+and remove row duplicates via
+
+```sql
+DELETE FROM fast_food_stock_prices
+WHERE rowid NOT IN (
+    SELECT MIN(rowid)
+    FROM fast_food_stock_prices
+    GROUP BY symbol, date
+);
+```
+
+
+delete a row based on symbol value
+```sql
+DELETE FROM table_name
+WHERE symbol = 'BBT';
+```
+
+change a table name 
+```sql
+ALTER TABLE banking_prices
+RENAME TO banking_stock_prices;
+```
 
 
 
